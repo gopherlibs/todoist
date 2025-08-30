@@ -1,0 +1,15 @@
+version: 2
+
+project_name: todoist
+
+builds:
+  - skip: true
+
+checksum:
+  name_template: "{{ .ProjectName }}-v{{ .Version }}-checksums.txt"
+
+announce:
+  skip: "{{ gt .Patch 0 }}"
+  mastodon:
+    enabled: false
+    server: "https://social.linodians.com"
