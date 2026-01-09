@@ -6,7 +6,7 @@ import (
 	"io"
 )
 
-type task struct {
+type Task struct {
 	UserID         string   `json:"user_id"`
 	ID             string   `json:"id"`
 	ProjectID      string   `json:"project_id"`
@@ -42,7 +42,7 @@ type task struct {
 
 // /api/v1/tasks
 type getTasksResponse struct {
-	Results    []task `json:"results"`
+	Results    []Task `json:"results"`
 	NextCursor string `json:"next_cursor"`
 }
 
