@@ -48,6 +48,22 @@ func (c *client) post(url *url.URL, body io.Reader) (*http.Response, error) {
 	return c.httpClient.Do(req)
 }
 
+// This takes a full URL complete with endpoint, params, and an optional body.
+func (c *client) delete(url *url.URL) (*http.Response, error) {
+
+	slog.Debug("Client making a DELETE request.", "url", url.String())
+
+	req, err := http.NewRequest("DELETE", url.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("User-Agent", c.userAgent)
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", c.token))
+
+	return c.httpClient.Do(req)
+}
+
 // Returns a new client, a must to use this package.
 func New(token string) *client {
 
