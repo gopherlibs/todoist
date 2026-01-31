@@ -23,7 +23,7 @@ type Task struct {
 	Duration struct {
 		Property1 int `json:"property1"`
 		Property2 int `json:"property2"`
-	} `json:"deadline"`
+	} `json:"duration"`
 	Checked        bool   `json:"checked"`
 	IsDeleted      bool   `json:"is_deleted"`
 	AddedAt        string `json:"added_at"`

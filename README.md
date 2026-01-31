@@ -1,5 +1,3 @@
-This repo is being setup. Nothing is ready yet, not even for contributions.
-
 # GopherLibs => Todoist [![Go Reference](https://pkg.go.dev/badge/github.com/gopherlibs/todoist.svg)](https://pkg.go.dev/github.com/gopherlibs/todoist) [![Go Report Card](https://goreportcard.com/badge/github.com/gopherlibs/todoist)](https://goreportcard.com/report/github.com/gopherlibs/todoist) [![Software License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gopherlibs/todoist/trunk/LICENSE)
 
 *This project is really early and figuring out its identity. Don't expect a stable (Go) API at the moment.*
@@ -22,12 +20,16 @@ It is meant to test this library, not really for end users.
 
 ## Goals
 
-- The first and only goal right now is to get this module usable to return the current MLB standings. This will then be used in the [wtfutil/wtf](https://github.com/wtfutil/wtf) project as a widget/module.
+- [ ] Implement the minimum functionality needed to support the Todoist module in [wtfutil/wtf](https://github.com/wtfutil/wtf).
+- [ ] All task endpoints supported.
+- [ ] Sync endpoint supported.
+- [ ] Other endpoints supported.
 
 
 ## Requirements
 
-The minimum Go version supported is v1.24.x.
+- The minimum Go version supported is v1.25.
+- A Todoist account will be needed.
 
 
 ## Usage
@@ -45,36 +47,37 @@ Alternatively, you can run `go get github.com/gopherlibs/big-league-stats/mlb` i
 
 ## Usage
 
+In short, you create a new instance of the `client`, authenticate with it, and then call methods that return the objects you'd like.
+Here's an example of getting a slice of tasks.
+
 ```go
 package main
 
 import (
 	"fmt"
 
-	"github.com/gopherlibs/big-league-stats/mlb"
+	"github.com/gopherlibs/todoist/api"
 )
 
 func main() {
 
-	img, err := gpic.NewImage("Ricardo@Feliciano.Tech")
+	c := api.New(os.Getenv("TODOIST_TOKEN"))
+
+	tasks, err := c.Tasks(args[0])
 	if err != nil {
-		fmt.Println(err)
-		return
+		fmt.Printf("Running 'Tasks' failed. Err: %s\n", err.Error())
+		return err
 	}
 
-	imgURL, err := img.URL()
-	if err != nil {
-		fmt.Println(err)
-		return
+	for _, t := range tasks.Results {
+		fmt.Printf("- %s - %s\n", t.Content, t.ID)
 	}
-
-	fmt.Println(imgURL.String())
 }
 ```
 
 ## Development
 
-This library is written and tested with Go v1.24+ in mind.
+This library is written and tested with Go v1.25+ in mind.
 `go fmt` is your friend.
 Please feel free to open Issues and PRs are you see fit.
 Any PR that requires a good amount of work or is a significant change, it would be best to open an Issue to discuss the change first.

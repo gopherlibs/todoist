@@ -3,6 +3,7 @@ package cmd
 import (
 	"errors"
 	"fmt"
+	"os"
 
 	"github.com/gopherlibs/todoist/api"
 
@@ -20,7 +21,7 @@ var closeCmd = &cobra.Command{
 			return errors.New("error - arg")
 		}
 
-		c := api.New()
+		c := api.New(os.Getenv("TODOIST_TOKEN"))
 
 		status, err := c.TaskClose(args[0])
 		if err != nil {

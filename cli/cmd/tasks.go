@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/gopherlibs/todoist/api"
 
@@ -15,7 +16,7 @@ var tasksCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		c := api.New()
+		c := api.New(os.Getenv("TODOIST_TOKEN"))
 
 		tasks, err := c.Tasks(args[0])
 		if err != nil {
