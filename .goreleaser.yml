@@ -8,6 +8,9 @@ builds:
 checksum:
   name_template: "{{ .ProjectName }}-v{{ .Version }}-checksums.txt"
 
+release:
+  prerelease: auto
+
 announce:
   skip: "{{ gt .Patch 0 }}"
   mastodon:
