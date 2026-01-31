@@ -6,7 +6,6 @@ import (
 	"log/slog"
 	"net/http"
 	"net/url"
-	"os"
 	"time"
 )
 
@@ -14,6 +13,7 @@ type client struct {
 	httpClient *http.Client
 	baseURL    *url.URL
 	userAgent  string
+	token      string
 }
 
 // This takes a full URL complete with endpoint and params.
@@ -27,7 +27,7 @@ func (c *client) get(url *url.URL) (*http.Response, error) {
 	}
 
 	req.Header.Add("User-Agent", c.userAgent)
-	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", os.Getenv("IST_TOKEN")))
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", c.token))
 
 	return c.httpClient.Do(req)
 }
@@ -43,13 +43,13 @@ func (c *client) post(url *url.URL, body io.Reader) (*http.Response, error) {
 	}
 
 	req.Header.Add("User-Agent", c.userAgent)
-	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", os.Getenv("IST_TOKEN")))
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", c.token))
 
 	return c.httpClient.Do(req)
 }
 
 // Returns a new client, a must to use this package.
-func New() *client {
+func New(token string) *client {
 
 	baseURL, err := url.Parse("https://api.todoist.com")
 	if err != nil {
@@ -62,5 +62,6 @@ func New() *client {
 		},
 		baseURL:   baseURL,
 		userAgent: "Gopherlibs/Todoist",
+		token:     token,
 	}
 }
