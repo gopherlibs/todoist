@@ -96,3 +96,18 @@ func (c *client) TaskClose(id string) (int, error) {
 
 	return resp.StatusCode, nil
 }
+
+func (c *client) TaskDelete(id string) (int, error) {
+
+	url, err := c.baseURL.Parse(fmt.Sprintf("/api/v1/tasks/%s", id))
+	if err != nil {
+		return 400, err
+	}
+
+	resp, err := c.delete(url)
+	if err != nil {
+		return 400, err
+	}
+
+	return resp.StatusCode, nil
+}
