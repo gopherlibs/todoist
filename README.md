@@ -20,7 +20,7 @@ It is meant to test this library, not really for end users.
 
 ## Goals
 
-- [ ] Implement the minimum functionality needed to support the Todoist module in [wtfutil/wtf](https://github.com/wtfutil/wtf).
+- [x] Implement the minimum functionality needed to support the Todoist module in [wtfutil/wtf](https://github.com/wtfutil/wtf).
 - [ ] All task endpoints supported.
 - [ ] Sync endpoint supported.
 - [ ] Other endpoints supported.
@@ -34,15 +34,16 @@ It is meant to test this library, not really for end users.
 
 ## Usage
 
-`Big League Stats` is a Go module so the best way to use it is to add an import in the file you want to use it in and then run `go mod tidy` to get it downloaded.
+Gopherlibs Todoist is a Go module so the best way to use it is to add an import in the file you want to use it in and then run `go mod tidy` to get it downloaded.
+For example:
 
 ```go
 import(
-	"github.com/gopherlibs/big-league-stats/mlb"
+	"github.com/gopherlibs/todoist/api"
 )
 ```
 
-Alternatively, you can run `go get github.com/gopherlibs/big-league-stats/mlb` in your project directory.
+Alternatively, you can run `go get github.com/gopherlibs/todoist/api` in your project directory.
 
 
 ## Usage
