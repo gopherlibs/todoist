@@ -36,7 +36,7 @@ type getProjectsResponse struct {
 	NextCursor string    `json:"next_cursor"`
 }
 
-func (c *client) Projects() (*getProjectsResponse, error) {
+func (c *Client) Projects() (*getProjectsResponse, error) {
 
 	url, err := c.baseURL.Parse("/api/v1/projects")
 	if err != nil {
