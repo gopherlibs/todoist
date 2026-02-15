@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 )
 
@@ -62,4 +63,32 @@ func (c *Client) Projects() (*getProjectsResponse, error) {
 
 	return projects, nil
 
+}
+
+// Get a single project by its ID
+func (c *Client) Project(id string) (*project, error) {
+
+	url, err := c.baseURL.Parse(fmt.Sprintf("/api/v1/projects/%s", id))
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := c.get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	var p *project
+	err = json.Unmarshal(body, &p)
+	if err != nil {
+		return nil, err
+	}
+
+	return p, nil
 }
