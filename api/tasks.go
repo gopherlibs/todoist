@@ -46,7 +46,7 @@ type getTasksResponse struct {
 	NextCursor string `json:"next_cursor"`
 }
 
-func (c *client) Tasks(projectID string) (*getTasksResponse, error) {
+func (c *Client) Tasks(projectID string) (*getTasksResponse, error) {
 
 	u, err := c.baseURL.Parse("/api/v1/tasks?limit=200")
 	if err != nil {
@@ -82,7 +82,7 @@ func (c *client) Tasks(projectID string) (*getTasksResponse, error) {
 	return tasks, nil
 }
 
-func (c *client) TaskClose(id string) (int, error) {
+func (c *Client) TaskClose(id string) (int, error) {
 
 	url, err := c.baseURL.Parse(fmt.Sprintf("/api/v1/tasks/%s/close", id))
 	if err != nil {
@@ -97,7 +97,7 @@ func (c *client) TaskClose(id string) (int, error) {
 	return resp.StatusCode, nil
 }
 
-func (c *client) TaskDelete(id string) (int, error) {
+func (c *Client) TaskDelete(id string) (int, error) {
 
 	url, err := c.baseURL.Parse(fmt.Sprintf("/api/v1/tasks/%s", id))
 	if err != nil {

@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-type client struct {
+type Client struct {
 	httpClient *http.Client
 	baseURL    *url.URL
 	userAgent  string
@@ -17,7 +17,7 @@ type client struct {
 }
 
 // This takes a full URL complete with endpoint and params.
-func (c *client) get(url *url.URL) (*http.Response, error) {
+func (c *Client) get(url *url.URL) (*http.Response, error) {
 
 	slog.Debug("Client making a GET request.", "url", url.String())
 
@@ -33,7 +33,7 @@ func (c *client) get(url *url.URL) (*http.Response, error) {
 }
 
 // This takes a full URL complete with endpoint, params, and an optional body.
-func (c *client) post(url *url.URL, body io.Reader) (*http.Response, error) {
+func (c *Client) post(url *url.URL, body io.Reader) (*http.Response, error) {
 
 	slog.Debug("Client making a POST request.", "url", url.String())
 
@@ -49,7 +49,7 @@ func (c *client) post(url *url.URL, body io.Reader) (*http.Response, error) {
 }
 
 // This takes a full URL complete with endpoint, params, and an optional body.
-func (c *client) delete(url *url.URL) (*http.Response, error) {
+func (c *Client) delete(url *url.URL) (*http.Response, error) {
 
 	slog.Debug("Client making a DELETE request.", "url", url.String())
 
@@ -65,14 +65,14 @@ func (c *client) delete(url *url.URL) (*http.Response, error) {
 }
 
 // Returns a new client, a must to use this package.
-func New(token string) *client {
+func New(token string) *Client {
 
 	baseURL, err := url.Parse("https://api.todoist.com")
 	if err != nil {
 		return nil
 	}
 
-	return &client{
+	return &Client{
 		httpClient: &http.Client{
 			Timeout: 10 * time.Second,
 		},
