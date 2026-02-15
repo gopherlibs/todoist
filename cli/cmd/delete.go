@@ -10,7 +10,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// deleteCmd represents the standings command
 var deleteCmd = &cobra.Command{
 	Use:   "delete <task-id>",
 	Short: "Delete a task",
@@ -37,14 +36,4 @@ var deleteCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(deleteCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// standingsCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// standingsCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
